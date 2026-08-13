@@ -2,30 +2,24 @@
 
 ## 1. About this notebook
 
-This notebook is **Exercise 2 (Visual media analysis)** of a Text and Media Analytics (INFOMTMA) midterm take-home exam. It analyzes a set of roughly 200 images sampled from online news articles about artificial intelligence, drawn from four outlets: **NOS, NU.nl, The New York Times, and Reuters**.
-
-The guiding question is:
-
-> **How do news media visually frame AI?**
+This notebook analyzes a set of roughly 200 images sampled from online news articles about artificial intelligence, drawn from four outlets: **NOS, NU.nl, The New York Times, and Reuters**.
 
 To explore this, the notebook builds a small image-analysis pipeline that:
-1. Extracts low-level visual features (brightness, edges, texture, color) and runs object detection on each image.
+1. Extracts low-level visual features (brightness, edges, texture and color) and runs object detection on each image.
 2. Groups the images into clusters based on those features, using two different clustering techniques.
 3. Attempts to interpret and label the resulting clusters, and reflects on what such an unsupervised approach can and cannot tell us about visual framing.
 
-There is no single "correct" clustering solution here — the notebook is an exploratory, critical walkthrough of the strengths and limitations of using unsupervised machine learning on image data.
+There is no single "correct" clustering solution here. The notebook is an exploratory, critical walkthrough of the strengths and limitations of using unsupervised machine learning on image data.
 
-## 2. Step-by-step walkthrough (for beginners)
+## 2. Step-by-step walkthrough
 
-The notebook is organized into three parts, matching the three questions of the exercise, plus a data-loading step at the start.
-
-### Step 0: Load and prepare the image data
+### Step 1: Load and prepare the image data
 - Installs the required image-processing packages (`pillow-heif`, `tqdm`, `pandas`, `opencv-python`).
 - Unzips the provided `IMAGES_TMA.zip` file, which contains the raw images organized by outlet folder (NOS, NU.NL, NYT, Reuters).
 - Converts every image to a standard JPEG format (some images may originally be `.png`, `.heic`, `.webp`, etc.) and saves them into a new `processed_jpg` folder.
 - While doing this, it catalogues each image in a table (`df_2`) with information like filename, dimensions, file size, and which outlet it came from. Each image also gets a unique label, e.g. `NOS_1`, `Reuters_12`.
 
-### Step 1: Enrich the dataset with image features (Question 1)
+### Step 2: Enrich the dataset with image features
 This step turns each image into a set of numbers a computer can compare. For every image, the notebook computes:
 - **Gray brightness** — the average pixel intensity, i.e. how light or dark the image is overall.
 - **Canny edge density** — the proportion of pixels detected as "edges," giving a sense of how visually busy or detailed the image is (e.g. text overlays, sharp contours).
@@ -35,7 +29,7 @@ This step turns each image into a set of numbers a computer can compare. For eve
 
 The step ends with a discussion of why these particular features were chosen and what they capture.
 
-### Step 2: Cluster the images (Question 2)
+### Step 2: Cluster the images
 Now that each image has a set of numeric features, the notebook groups similar images together:
 - The six numeric features (brightness, edge density, texture, and the three color means) are **standardized** (rescaled so they're on comparable scales) using `StandardScaler`.
 - **K-Means clustering** is applied. The **elbow method** (plotting how clustering error decreases as the number of clusters increases) is used to help decide on a reasonable number of clusters — the notebook settles on **k = 3**.
@@ -43,7 +37,7 @@ Now that each image has a set of numeric features, the notebook groups similar i
 - The two clustering solutions are evaluated using **silhouette score** and **Davies-Bouldin index**, two standard metrics for judging how well-separated clusters are.
 - Example images from each cluster are displayed so the results can be inspected visually, alongside a table of average feature values per cluster.
 
-### Step 3: Label and interpret the clusters (Question 3)
+### Step 3: Label and interpret the clusters
 The final step tries to make sense of what each cluster represents:
 - Cluster sizes are compared between the K-Means and hierarchical solutions.
 - Representative sample images are shown for each cluster.
