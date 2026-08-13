@@ -54,7 +54,7 @@ This notebook was written to run in **Google Colab**, since it relies on `/conte
 - The image dataset: `IMAGES_TMA.zip`
 
 ### Steps to run
-1. **Get the data.** Obtain `IMAGES_TMA.zip` (the image dataset for this exercise) and upload it to your Colab environment so that it is available at `/content/IMAGES_TMA.zip`.
+1. **Get the data.** Download all four zipped datasets from my repo, place them into a folder named `dataset`, then compress/zip that folder. Obtain `dataset.zip` (the image dataset for this exercise) and upload it to your Colab environment so that it is available at `/content/datasset.zip`.
 2. **Open the notebook** in Google Colab (or Jupyter, if you adjust the file paths).
 3. **Run the cells in order, from top to bottom.** The notebook:
    - installs dependencies,
