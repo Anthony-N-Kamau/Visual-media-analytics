@@ -1,4 +1,4 @@
-# Visual Analytics — How Do News Media Visually Frame AI?
+# How Do News Media Visually Frame AI?
 
 ## 1. About this notebook
 
